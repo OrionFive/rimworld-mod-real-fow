@@ -156,7 +156,7 @@ namespace RimWorldRealFoW.ThingComps.ThingSubComps {
 
         private bool lightEnough(IntVec3 position)
         {
-            return glowGrid.GameGlowAt(position) > 0.1f;
+            return glowGrid.GameGlowAt(position) >= RealFoWModSettings.minimumLightLevel;
         }
 
         private bool hasPartShownToPlayer() {

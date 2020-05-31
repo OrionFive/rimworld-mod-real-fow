@@ -13,4 +13,8 @@
   <fogFadeSpeedSetting_Medium>Medium</fogFadeSpeedSetting_Medium>
   <fogFadeSpeedSetting_Fast>Fast</fogFadeSpeedSetting_Fast>
   <fogFadeSpeedSetting_Disabled>Disabled</fogFadeSpeedSetting_Disabled>
+  
+  <lightMinimum_title>Minimum light level ({0})</lightMinimum_title>
+  <lightMinimum_desc>The minimum light level to see pawns.</lightMinimum_desc>
+  
 </LanguageData>
