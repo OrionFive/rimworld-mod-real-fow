@@ -24,7 +24,7 @@ namespace RimWorldRealFoW {
 
 		public static FogFadeSpeedEnum fogFadeSpeed = FogFadeSpeedEnum.Medium;
 		public static FogAlpha fogAlpha = FogAlpha.Medium;
-        public static float minimumLightLevel = 0.1f;
+        public static float minimumLightLevel;
 
 		public static void DoSettingsWindowContents(Rect rect) {
 			Listing_Standard list = new Listing_Standard(GameFont.Small);
@@ -101,7 +101,7 @@ namespace RimWorldRealFoW {
 
 			Scribe_Values.Look(ref fogFadeSpeed, "fogFadeSpeed", FogFadeSpeedEnum.Medium);
 			Scribe_Values.Look(ref fogAlpha, "fogAlpha", FogAlpha.Medium);
-			Scribe_Values.Look(ref minimumLightLevel, "minimumLightLevel", 0.1f);
+			Scribe_Values.Look(ref minimumLightLevel, "minimumLightLevel");
 
 			applySettings();
 		}

@@ -15,6 +15,6 @@
   <fogFadeSpeedSetting_Disabled>Disabled</fogFadeSpeedSetting_Disabled>
   
   <lightMinimum_title>Minimum light level ({0})</lightMinimum_title>
-  <lightMinimum_desc>The minimum light level to see pawns.</lightMinimum_desc>
+  <lightMinimum_desc>The minimum light level to see pawns. At zero pawns are visible at any light level.</lightMinimum_desc>
   
 </LanguageData>
