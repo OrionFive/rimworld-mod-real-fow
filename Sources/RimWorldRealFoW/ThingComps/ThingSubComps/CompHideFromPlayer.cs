@@ -27,7 +27,7 @@ namespace RimWorldRealFoW.ThingComps.ThingSubComps {
 
 		private Map map;
 		private FogGrid fogGrid;
-        private GlowGrid glowGrid;
+		private GlowGrid glowGrid;
 		private MapComponentSeenFog mapCompSeenFog;
 		
 		private CompHiddenable compHiddenable;
@@ -156,7 +156,7 @@ namespace RimWorldRealFoW.ThingComps.ThingSubComps {
 
         private bool lightEnough(IntVec3 position)
         {
-            if (RealFoWModSettings.minimumLightLevel <= 0) return true;
+			if (RealFoWModSettings.minimumLightLevel <= 0) return true;
             return glowGrid.GameGlowAt(position) >= RealFoWModSettings.minimumLightLevel;
         }
 

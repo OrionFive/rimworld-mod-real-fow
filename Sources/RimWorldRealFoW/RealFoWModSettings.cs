@@ -24,7 +24,7 @@ namespace RimWorldRealFoW {
 
 		public static FogFadeSpeedEnum fogFadeSpeed = FogFadeSpeedEnum.Medium;
 		public static FogAlpha fogAlpha = FogAlpha.Medium;
-        public static float minimumLightLevel;
+		public static float minimumLightLevel;
 
 		public static void DoSettingsWindowContents(Rect rect) {
 			Listing_Standard list = new Listing_Standard(GameFont.Small);
@@ -69,13 +69,13 @@ namespace RimWorldRealFoW {
 			list.Gap();
 			list.GapLine();
 
-            Rect rectLightLevel = list.GetRect(30f);
-            Widgets.Label(rectLightLevel.LeftHalf(), "lightMinimum_title".Translate(minimumLightLevel.ToStringPercent()));
-            minimumLightLevel = Widgets.HorizontalSlider(rectLightLevel.RightHalf(), minimumLightLevel, 0, 1);
+			Rect rectLightLevel = list.GetRect(30f);
+			Widgets.Label(rectLightLevel.LeftHalf(), "lightMinimum_title".Translate(minimumLightLevel.ToStringPercent()));
+			minimumLightLevel = Widgets.HorizontalSlider(rectLightLevel.RightHalf(), minimumLightLevel, 0, 1);
 
-            Text.Font = GameFont.Tiny;
-            list.Label("lightMinimum_desc".Translate());
-            Text.Font = GameFont.Small;
+			Text.Font = GameFont.Tiny;
+			list.Label("lightMinimum_desc".Translate());
+			Text.Font = GameFont.Small;
 
 			list.End();
 		}
