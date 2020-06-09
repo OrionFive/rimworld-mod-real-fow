@@ -40,7 +40,7 @@ namespace RimWorldRealFoW.ThingComps.ThingSubComps {
 		private bool isSaveable;
 		private bool saveCompressible;
 
-        public override void PostSpawnSetup(bool respawningAfterLoad) {
+		public override void PostSpawnSetup(bool respawningAfterLoad) {
 			base.PostSpawnSetup(respawningAfterLoad);
 
 			setupDone = true;
