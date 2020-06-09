@@ -149,18 +149,18 @@ namespace RimWorldRealFoW.ThingComps.ThingSubComps {
 #endif
 		}
 
-        private bool canBeSeen(IntVec3 position, bool checkLight)
-        {
-            return hasPartShownToPlayer() && (!checkLight || lightEnough(position));
-        }
+		private bool canBeSeen(IntVec3 position, bool checkLight)
+		{
+	    		return hasPartShownToPlayer() && (!checkLight || lightEnough(position));
+		}
 
-        private bool lightEnough(IntVec3 position)
-        {
+		private bool lightEnough(IntVec3 position)
+		{
 			if (RealFoWModSettings.minimumLightLevel <= 0) return true;
-            return glowGrid.GameGlowAt(position) >= RealFoWModSettings.minimumLightLevel;
-        }
+			return glowGrid.GameGlowAt(position) >= RealFoWModSettings.minimumLightLevel;
+		}
 
-        private bool hasPartShownToPlayer() {
+		private bool hasPartShownToPlayer() {
 			Faction playerFaction = Faction.OfPlayer;
 			if (isOneCell) {
 				return mapCompSeenFog.isShown(playerFaction, lastPosition.x, lastPosition.z);
