@@ -102,10 +102,10 @@ namespace RimWorldRealFoW.ThingComps.ThingSubComps {
 			Rot4 newRotation = thing.Rotation;
 			if (thing != null && thing.Spawned && thing.Map != null && newPosition != iv3Invalid && (isOneCell || newRotation != r4Invalid)) {
 				if (map != thing.Map) {
-                    map = thing.Map;
-                    fogGrid = map.fogGrid;
-                    glowGrid = map.glowGrid;
-                    mapCompSeenFog = thing.Map.getMapComponentSeenFog();
+					map = thing.Map;
+					fogGrid = map.fogGrid;
+					glowGrid = map.glowGrid;
+					mapCompSeenFog = thing.Map.getMapComponentSeenFog();
 
 				} else if (mapCompSeenFog == null) {
 					mapCompSeenFog = thing.Map.getMapComponentSeenFog();
