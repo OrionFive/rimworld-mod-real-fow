@@ -27,6 +27,7 @@ namespace RimWorldRealFoW.ThingComps.ThingSubComps {
 
 		private Map map;
 		private FogGrid fogGrid;
+        private GlowGrid glowGrid;
 		private MapComponentSeenFog mapCompSeenFog;
 		
 		private CompHiddenable compHiddenable;
@@ -39,7 +40,7 @@ namespace RimWorldRealFoW.ThingComps.ThingSubComps {
 		private bool isSaveable;
 		private bool saveCompressible;
 
-		public override void PostSpawnSetup(bool respawningAfterLoad) {
+        public override void PostSpawnSetup(bool respawningAfterLoad) {
 			base.PostSpawnSetup(respawningAfterLoad);
 
 			setupDone = true;
@@ -101,9 +102,10 @@ namespace RimWorldRealFoW.ThingComps.ThingSubComps {
 			Rot4 newRotation = thing.Rotation;
 			if (thing != null && thing.Spawned && thing.Map != null && newPosition != iv3Invalid && (isOneCell || newRotation != r4Invalid)) {
 				if (map != thing.Map) {
-					map = thing.Map;
-					fogGrid = map.fogGrid;
-					mapCompSeenFog = thing.Map.getMapComponentSeenFog();
+                    map = thing.Map;
+                    fogGrid = map.fogGrid;
+                    glowGrid = map.glowGrid;
+                    mapCompSeenFog = thing.Map.getMapComponentSeenFog();
 
 				} else if (mapCompSeenFog == null) {
 					mapCompSeenFog = thing.Map.getMapComponentSeenFog();
@@ -114,7 +116,7 @@ namespace RimWorldRealFoW.ThingComps.ThingSubComps {
 				}
 				
 				if (forceCheck || !calculated || newPosition != lastPosition || (!isOneCell && newRotation != lastRotation)) {
-					calculated = true;
+					calculated = !isPawn; // always recalculate pawns
 					lastPosition = newPosition;
 					lastRotation = newRotation;
 
@@ -123,9 +125,9 @@ namespace RimWorldRealFoW.ThingComps.ThingSubComps {
 					if (mapCompSeenFog != null && !fogGrid.IsFogged(lastPosition)) {
 						if (isSaveable && !saveCompressible) {
 							if (!belongToPlayer) {
-								if (isPawn && !hasPartShownToPlayer()) {
+								if (isPawn && !canBeSeen(lastPosition, true)) {
 									compHiddenable.hide();
-								} else if (!isPawn && !seenByPlayer && !hasPartShownToPlayer()) {
+								} else if (!isPawn && !seenByPlayer && !canBeSeen(lastPosition, false)) {
 									compHiddenable.hide();
 								} else {
 									seenByPlayer = true;
@@ -135,7 +137,7 @@ namespace RimWorldRealFoW.ThingComps.ThingSubComps {
 								seenByPlayer = true;
 								compHiddenable.show();
 							}
-						} else if ((forceUpdate || !seenByPlayer) && hasPartShownToPlayer()) {
+						} else if ((forceUpdate || !seenByPlayer) && canBeSeen(lastPosition, false)) {
 							seenByPlayer = true;
 							compHiddenable.show();
 						}
@@ -147,7 +149,17 @@ namespace RimWorldRealFoW.ThingComps.ThingSubComps {
 #endif
 		}
 
-		private bool hasPartShownToPlayer() {
+        private bool canBeSeen(IntVec3 position, bool checkLight)
+        {
+            return hasPartShownToPlayer() && (!checkLight || lightEnough(position));
+        }
+
+        private bool lightEnough(IntVec3 position)
+        {
+            return glowGrid.GameGlowAt(position) >= RealFoWModSettings.minimumLightLevel;
+        }
+
+        private bool hasPartShownToPlayer() {
 			Faction playerFaction = Faction.OfPlayer;
 			if (isOneCell) {
 				return mapCompSeenFog.isShown(playerFaction, lastPosition.x, lastPosition.z);
